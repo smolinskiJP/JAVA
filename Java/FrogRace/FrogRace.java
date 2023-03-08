@@ -18,7 +18,7 @@ public class FrogRace {
         numSapos = scn.nextInt();
 
         for(int i = 0; i < numSapos; i++){
-            System.out.println("Digite o nome e tamanho do pulo do sapo " + (i+1));
+            System.out.println("Digite o nome & tamanho do pulo do sapo " + (i+1));
             Frog s = new Frog(scn.next());
             s.setDistanciaPulo(scn.nextInt());
             s.setDistanciaCorrida(distanciaCorrida);
