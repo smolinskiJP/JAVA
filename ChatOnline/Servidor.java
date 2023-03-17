@@ -6,6 +6,12 @@ import java.net.*;
 public class Servidor {
     private ServerSocket server;
 
+    public static void main(String[] args) throws IOException{
+        ServerSocket serverS = new ServerSocket(6969);
+        Servidor server = new Servidor(serverS);
+        server.start();
+    }
+
     public Servidor(ServerSocket server){
         this.server = server;
     }
@@ -22,11 +28,5 @@ public class Servidor {
         if(server!=null){
             server.close();
         }
-    }
-
-    public static void main(String[] args) throws IOException{
-        ServerSocket serverS = new ServerSocket(6969);
-        Servidor server = new Servidor(serverS);
-        server.start();
     }
 }

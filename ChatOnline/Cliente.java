@@ -10,6 +10,17 @@ public class Cliente {
     private BufferedWriter buffW;
     private String nome;
 
+    public static void main(String[] args) throws UnknownHostException, IOException{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Digite seu nome: ");
+        String nome = scan.nextLine();
+        Socket socket = new Socket("127.0.0.1", 6969);
+        Cliente cliente = new Cliente(socket, nome);
+        cliente.esperaLine();
+        cliente.mandarLine();
+        scan.close();
+    }
+
     public Cliente(Socket cliente, String nome){
         try{
             this.cliente = cliente;
@@ -30,10 +41,7 @@ public class Cliente {
             Scanner scan = new Scanner(System.in);
             while(cliente.isConnected()){
                 String line = scan.nextLine();
-                // if(line.compareTo(".quit") == 0){
-                //     cliente.close();
-                // }
-                buffW.write(nome + ": " + line);
+                buffW.write("\u001B[31m" + nome + ": " + line + "\u001B[m");
                 buffW.newLine();
                 buffW.flush();
             }
@@ -66,16 +74,5 @@ public class Cliente {
             if(buffW != null) buffW.close();
             if(cliente != null) cliente.close();
         } catch(IOException e){}
-    }
-
-    public static void main(String[] args) throws UnknownHostException, IOException{
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Digite seu nome: ");
-        String nome = scan.nextLine();
-        Socket socket = new Socket("127.0.0.1", 6969);
-        Cliente cliente = new Cliente(socket, nome);
-        cliente.esperaLine();
-        cliente.mandarLine();
-        scan.close();
     }
 }

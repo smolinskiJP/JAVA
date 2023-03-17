@@ -20,7 +20,7 @@ public class TratamentoClasse extends Thread{
             this.buffR = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
             this.buffW = new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream()));
             this.nome = buffR.readLine();
-            mandarLine(nome + " entrou");
+            mandarLine("\u001B[32m" + nome + " entrou \u001B[m");
         }catch(IOException e){
             fechaCliente(cliente, buffR, buffW);
         }
@@ -32,6 +32,7 @@ public class TratamentoClasse extends Thread{
         while(cliente.isConnected()){
             try{
                 line = buffR.readLine();
+                if(cliente.isClosed()) break;
                 mandarLine(line);
             } catch (IOException e){
                 fechaCliente(cliente, buffR, buffW);
